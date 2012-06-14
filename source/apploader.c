@@ -134,9 +134,9 @@ void app_dopatch(char *filename)
 	u32 ret, pathlen;
 	u32 filesize;
 
-	DIR_ITER* pdir = diropen ("/data/gecko/patch/");
+	DIR *pdir = opendir ("/data/gecko/patch/");
 	if(pdir == NULL){
-		pdir = diropen ("/patch/");
+		pdir = opendir ("/patch/");
 		if(pdir == NULL){
 			app_thread_state = 9;	// dir not found
 			channel_thread_state = 4;
@@ -145,7 +145,7 @@ void app_dopatch(char *filename)
 		}
 	}
 
-	dirclose(pdir);
+	closedir(pdir);
 	fflush(stdout);
 	
 	sprintf(filepath, GECKOPATCHDIR "/%s.gpf", filename);
@@ -196,16 +196,16 @@ void app_copycodes(char *filename)
 	u32 ret, pathlen;
 	u32 filesize;
 	
-	DIR_ITER* pdir = diropen ("/data/gecko/codes/");
+	DIR *pdir = opendir ("/data/gecko/codes/");
 	if(pdir == NULL){
-		pdir = diropen ("/codes/");
+		pdir = opendir ("/codes/");
 		if(pdir == NULL){
 			codes_state = 1;	// dir not found
 			return;
 		}
 	}
 	
-	dirclose(pdir);
+	closedir(pdir);
 	fflush(stdout);
 	
 	sprintf(filepath, GECKOCODEDIR "/%s.gct", filename);

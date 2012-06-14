@@ -94,15 +94,15 @@ u32 sd_init()
 void sd_check_mkdir(char *path)
 //---------------------------------------------------------------------------------
 {
-	DIR_ITER *pdir;
+	DIR *pdir;
 
-	pdir = diropen(path);
+	pdir = opendir(path);
 	if(pdir == NULL){
 		mkdir(path, 0);
 		return;
 	}
 
-	dirclose(pdir);
+	closedir(pdir);
 }
 
 //---------------------------------------------------------------------------------

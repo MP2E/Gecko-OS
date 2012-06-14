@@ -90,13 +90,13 @@ nofileloop:
 void menu_scandir()
 //---------------------------------------------------------------------------------
 {
-	char filename[MAXPATHLEN];
 	char tempfilename[MAXPATHLEN];
 
-	DIR_ITER *pdir;
+	DIR *pdir;
+	struct dirent *entry;
 	struct stat fstat;
 
-	pdir=diropen("/files");
+	pdir = opendir("/files");
 
 	if( filelist == NULL )
 	{
@@ -108,8 +108,11 @@ void menu_scandir()
 	numfiles = 0;
 	idcount = 0;
 
-	while( dirnext(pdir, filename, &fstat ) == 0 )
+	while( entry = readdir(pdir) )
 	{
+		strncpy( tempfilename, "/files", MAXPATHLEN );
+		strncat( tempfilename, entry->d_name, MAXPATHLEN );
+	        stat( entry->d_name, &fstat );
 		
 		// if directory then continue
 		if( fstat.st_mode & S_IFDIR ){
@@ -121,10 +124,6 @@ void menu_scandir()
 			afiles += 4;
 			filelist = realloc(filelist, afiles * sizeof( struct foundfile ) );
 		}
-
-		filename[MAXPATHLEN-1] = 0;
-		
-		strncpy(tempfilename, filename, MAXPATHLEN );
 
 		int i = strlen(tempfilename);	// get length of files
 		
@@ -176,5 +175,5 @@ void menu_scandir()
 			numfiles++;
 		}
 	}
-	dirclose( pdir );
+	closedir( pdir );
 }

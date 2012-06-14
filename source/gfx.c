@@ -123,7 +123,7 @@ void gfx_draw_image(f32 xpos, f32 ypos, u16 width, u16 height, u8 data[], float 
 	height*=.5;
 	guMtxIdentity (m1);
 	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
-	Vector axis =(Vector) {0 , 0, 1 };
+	guVector axis =(guVector) {0 , 0, 1 };
 	guMtxRotAxisDeg (m2, &axis, degrees);
 	guMtxConcat(m2,m1,m);
 
@@ -176,7 +176,7 @@ void gfx_drawtile(f32 xpos, f32 ypos, u16 width, u16 height, u8 data[], float de
 	height*=.5;
 	guMtxIdentity (m1);
 	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
-	Vector axis =(Vector) {0 , 0, 1 };
+	guVector axis =(guVector) {0 , 0, 1 };
 	guMtxRotAxisDeg (m2, &axis, degrees);
 	guMtxConcat(m2,m1,m);
 	guMtxTransApply(m,m, xpos+width,ypos+height,0);
