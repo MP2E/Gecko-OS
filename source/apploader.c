@@ -1369,7 +1369,7 @@ void apploader_thread()
 	app_thread_state = 0;
 
 	if(!app_running){
-		LWP_CreateThread(&thread, dvd_switchios, NULL, NULL, 0, 2);
+	  LWP_CreateThread(&thread, &dvd_switchios, NULL, NULL, 0, 2);
 		app_running = 1;
 	}
 }

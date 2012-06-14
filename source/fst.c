@@ -689,7 +689,7 @@ void fst_thread()
 {
 	fst_thread_state = 0;
 	if(!fst_running){
-		LWP_CreateThread(&fstthread, fst_getupdates, NULL, NULL, 0, 2);
+		LWP_CreateThread(&fstthread, &fst_getupdates, NULL, NULL, 0, 2);
 		fst_running = 1;
 	}
 }
@@ -706,7 +706,7 @@ void installios_thread()
 {
 	if(!installios_running){
 		installios_thread_state = 0;
-		LWP_CreateThread(&installiosthread, installios, NULL, NULL, 0, 2);
+		LWP_CreateThread(&installiosthread, &installios, NULL, NULL, 0, 2);
 		installios_running = 1;
 	}
 }
